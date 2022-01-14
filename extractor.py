@@ -4,6 +4,7 @@ from urllib.parse import urlsplit
 from collections import deque
 from bs4 import BeautifulSoup
 import pandas as pd
+import csv
 import os
 # from google.colab import files
 #change
@@ -66,12 +67,29 @@ class extract:
                   unscraped.append(link)
 
 
-    # path = os.getcwd()
-    df = pd.DataFrame(emails, columns=["Email"])
-    
-    df.to_csv('/home/kali/scripts/mop-up/data/emails.csv', index=False)
+   
     return emails
 
 
-obj = extract()
-obj.email_extracting("http://www.technicianoverlord.com/emails/k")
+  def write_file(self, emails, u):
+    # file = open("/data/emails.csv")
+    dict = {} 
+    # print(emails)
+    for email in emails:
+      # print(email) 
+      dict.update({email: u})
+
+    print(dict)
+    if (len(dict)>0):
+      with open('data/emails.csv', 'w') as csv_file:  
+        writer = csv.writer(csv_file)
+        for email, u in dict.items():
+          writer.writerow([email, u])
+          print("**writing**")
+
+    print("**write func complete**")
+# obj = extract()
+# emails = ["adada@asdcsc.com", "ada@asdcsc.com", "adada@assc.com", "aa@asdcsc.com", "adada@assc.com"]
+# u = "http://www.technician.com/emails/"
+# obj.write_file(emails, u)
+# obj.email_extracting("http://www.technicianoverlord.com/emails/")

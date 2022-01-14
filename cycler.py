@@ -9,7 +9,6 @@ class cycle:
         reqs = requests.get(url)
         soup = BeautifulSoup(reqs.text, 'html.parser')
 
-
         # file = open("/home/kali/scripts/mop-up/data/urls.csv", "w")
 
         urls = set()
@@ -18,10 +17,9 @@ class cycle:
         for link in soup.find_all('a'):
             urls.add(link.get('href'))
 
-        print(urls)
         return urls
 
     
 
-obj = cycle()
-obj.url_cycling()
+# obj = cycle()
+# obj.url_cycling()
